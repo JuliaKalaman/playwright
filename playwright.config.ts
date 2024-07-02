@@ -7,6 +7,8 @@ import { defineConfig, devices } from '@playwright/test';
 // import dotenv from 'dotenv';
 // dotenv.config({ path: path.resolve(__dirname, '.env') });
 
+require('dotenv').config();
+
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
@@ -20,67 +22,86 @@ export default defineConfig({
   // globalSetup: 'global-setup.ts',
   // globalTeardown: 'global-teardown.ts',
   testIgnore: '**.skip.spec.ts',
-  // testMatch: '',
+  testMatch: '**.spec.ts',
   //outputDir: 'res',
   //timeout: 60 * 1000,
 
   use: {
-    baseURL: 'http://127.0.0.1:3000',
+    headless: false,
+    baseURL: process.env.BASE_URL,
     trace: 'on-first-retry',
-    // screenshot: 'only-on-failure',
-    // video: 'retain-on-failure',
+    httpCredentials: {
+      username: process.env.USER_NAME!,
+      password: process.env.USER_PASS!
+    },
   },
 
+  // use: {
+  //   baseURL: 'http://127.0.0.1:3000',
+  //   trace: 'on-first-retry',
+  // screenshot: 'only-on-failure',
+  // video: 'retain-on-failure',
+  // },
+
   /* Configure projects for major browsers */
+
   projects: [
     {
       name: 'qauto',
-      testMatch: '**qauto.spec.ts',
-      use: {
-        ...devices['Desktop Chrome'],
-        headless: false,
-        baseURL: 'https://qauto.forstudy.space/',
-        httpCredentials: {
-          username: 'guest',
-          password: 'welcome2qauto',
-        }
-      }
-    },
-    // {
-    //   name: 'chromium',
-    //   use: { ...devices['Desktop Chrome'] },
-    // },
-
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
-
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
-
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
-    // },
-
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    // },
+      testMatch: '**.spec.ts',
+      use: { ...devices['Desktop Chrome'] }
+    }
   ],
+
+  // projects: [
+  //   {
+  //     name: 'qauto',
+  //     testMatch: '**qauto.spec.ts',
+  //     use: {
+  //       ...devices['Desktop Chrome'],
+  //       headless: false,
+  //       baseURL: 'https://qauto.forstudy.space/',
+  //       httpCredentials: {
+  //         username: 'guest',
+  //         password: 'welcome2qauto',
+  //       }
+  //     }
+  //   },
+  // {
+  //   name: 'chromium',
+  //   use: { ...devices['Desktop Chrome'] },
+  // },
+
+  // {
+  //   name: 'firefox',
+  //   use: { ...devices['Desktop Firefox'] },
+  // },
+
+  // {
+  //   name: 'webkit',
+  //   use: { ...devices['Desktop Safari'] },
+  // },
+
+  /* Test against mobile viewports. */
+  // {
+  //   name: 'Mobile Chrome',
+  //   use: { ...devices['Pixel 5'] },
+  // },
+  // {
+  //   name: 'Mobile Safari',
+  //   use: { ...devices['iPhone 12'] },
+  // },
+
+  /* Test against branded browsers. */
+  // {
+  //   name: 'Microsoft Edge',
+  //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
+  // },
+  // {
+  //   name: 'Google Chrome',
+  //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
+  // },
+  // ],
 
   /* Run your local dev server before starting the tests */
   // webServer: {
