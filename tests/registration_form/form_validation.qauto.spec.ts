@@ -12,14 +12,14 @@ test.describe('Check registration form', () => {
         registrationForm = await homePage.openRegistrationForm()
     })
 
-    // test('Registration positive test', async () => {
-    //     await registrationForm.inputName.fill('Ben')
-    //     await registrationForm.inputLastName.fill('Affleck')
-    //     await registrationForm.inputEmail.fill('aqa-affleck@test.com')
-    //     await registrationForm.inputPassword.pressSequentially('1234!Qwerty$%', { delay: 100 })
-    //     await registrationForm.inputReEnterPassword.pressSequentially('1234!Qwerty$%')
-    //     await registrationForm.registerButton.click()
-    // })
+    test('Registration positive test', async () => {
+        await registrationForm.inputName.fill('Ben')
+        await registrationForm.inputLastName.fill('Affleck')
+        await registrationForm.inputEmail.fill('aqa-affleck@test.com')
+        await registrationForm.inputPassword.pressSequentially('1234!Qwerty$%', { delay: 100 })
+        await registrationForm.inputReEnterPassword.pressSequentially('1234!Qwerty$%')
+        await registrationForm.registerButton.click()
+    })
 
     test('Empty fields, negative test 1', async () => {
         await registrationForm.inputName.click()
