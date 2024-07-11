@@ -13,7 +13,9 @@ require('dotenv').config();
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './tests/registration_form',
+  // testDir: './tests/registration_form',
+  testDir: './tests',
+  // testDir: './tests',
   fullyParallel: false,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
@@ -47,7 +49,33 @@ export default defineConfig({
 
   projects: [
     {
+      name: 'login',
+      testDir: './tests/setup',
+      testMatch: 'login.setup.ts',
+      use: {
+        ...devices['Desktop Chrome'],
+      }
+    },
+    {
       name: 'qauto',
+      testMatch: '**qauto.spec.ts',
+      use: {
+        ...devices['Desktop Chrome']
+      }
+    },
+    {
+      name: 'example',
+      testDir: './tests/storage',
+      testMatch: '**.spec.ts',
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: 'session-storage.json',
+      },
+      dependencies: ['login']
+    },
+    {
+      name: 'fixtures',
+      testDir: './tests/fixture',
       testMatch: '**.spec.ts',
       use: { ...devices['Desktop Chrome'] }
     }
