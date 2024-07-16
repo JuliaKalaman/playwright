@@ -51,7 +51,7 @@ export default defineConfig({
     {
       name: 'login',
       testDir: './tests/setup',
-      testMatch: 'login.setup.ts',
+      testMatch: '**.setup.ts',
       use: {
         ...devices['Desktop Chrome'],
       }
@@ -78,6 +78,12 @@ export default defineConfig({
       testDir: './tests/fixture',
       testMatch: '**.spec.ts',
       use: { ...devices['Desktop Chrome'] }
+    },
+    {
+      name: 'api-tests',
+      use: { ...devices['Desktop Chrome'] },
+      testDir: './tests/api',
+      testMatch: '**.spec.ts',
     }
   ],
 

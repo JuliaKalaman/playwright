@@ -6,6 +6,7 @@ export class HomePage extends BasePage {
 
     protected readonly _header: Locator
     protected readonly _signInButton: Locator
+    protected readonly _guestLogInButton: Locator
     protected readonly _modal: Locator
     protected readonly _registrationButton: Locator
     protected readonly _emailInput: Locator
@@ -16,6 +17,7 @@ export class HomePage extends BasePage {
         super(page, '/')
         this._header = this._page.locator('.header')
         this._signInButton = this._header.getByRole('button', { name: 'sign in' })
+        this._guestLogInButton = this._header.getByRole('button', { name: 'Guest log in' })
         this._modal = this._page.locator('.modal-content')
         this._registrationButton = this._modal.getByRole('button', { name: 'registration' })
         this._emailInput = this._modal.locator('#signinEmail')
@@ -34,5 +36,9 @@ export class HomePage extends BasePage {
         await this._emailInput.fill(login)
         await this._passwordInput.fill(pass)
         await this._loginButton.click()
+    }
+
+    async loginAsGest() {
+        await this._guestLogInButton.click()
     }
 }
