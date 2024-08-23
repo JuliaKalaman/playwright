@@ -29,7 +29,8 @@ export default defineConfig({
   //timeout: 60 * 1000,
 
   use: {
-    headless: false,
+    // headless: false,
+    headless: true,
     baseURL: process.env.BASE_URL,
     trace: 'on-first-retry',
     httpCredentials: {
