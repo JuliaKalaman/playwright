@@ -18,7 +18,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Run your tests
-        run: npx playwright test
+        run: npx playwright test form_validation.qauto.spec.ts --project=qauto
       - uses: actions/upload-artifact@v3
         if: always()
         with:
