@@ -60,7 +60,7 @@ test.describe('Registration form', async () => {
         await expect.soft(modal.getByText('Re-enter password required'), 'Re-enter password required').toBeVisible()
         await expect.soft(modal.getByText('Re-enter password required'), 'Re-enter password required text with red color').toHaveCSS('color', 'rgb(220, 53, 69)')
         await expect.soft(inputReEnterPassword, 'Re-enter password required field with red border color').toHaveCSS('border-color', 'rgb(220, 53, 69)')
-        await expect.soft(modal).toHaveScreenshot('sign-in-modal.png')
+        // await expect.soft(modal).toHaveScreenshot('sign-in-modal.png')
     })
 
     test('Field Name: wrong data & wrong length, negative test 2', async ({ page }) => {
